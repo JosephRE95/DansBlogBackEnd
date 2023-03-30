@@ -23,7 +23,7 @@ export function PostFactory(sequelize: Sequelize) {
             allowNull: false,
         },
         post: {
-            type: 'VARCHAR(5000)',
+            type: 'VARCHAR(10000)',
             allowNull: false,
         },
        userId: {
