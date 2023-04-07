@@ -13,13 +13,13 @@ app.use(express.urlencoded({extended: true}));
 
 const cors = require('cors');           
 const corsOptions = {
-    origin: [ 'http://localhost:4200', 'http://localhost:3001' ]
+    origin: [ 'http://localhost:4200', 'http://localhost:3000' ]
 };
 app.use(cors(corsOptions));
 
 // routes
 app.use('/api/posts', postRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api/user', userRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     res.status(404).end();
