@@ -28,11 +28,6 @@ export const createPost: RequestHandler = async (req, res, next) => {
 }
 
 export const getPost: RequestHandler = async (req, res, next) => {
-    let user: User | null = await verifyUser(req);
-
-    if (!user) {
-        return res.status(403).send();
-    }
 
     let postId = req.params.postId;
     let postFound = await Post.findByPk(postId);
@@ -59,6 +54,26 @@ export const updatePost: RequestHandler = async (req, res, next) => {
     }
     else {
         res.status(400).json();
+    }
+}
+
+export const searchPost: RequestHandler = async (req, res, next) => {
+    const { Op } = require('sequelize');
+    console.log("ogjogjojfojj")
+    let query = req.params.query.toString()
+    let foundPosts = await Post.findAll({
+        limit: 10,
+        offset: 0,
+        where: {
+          [Op.or]: [
+            { title: { [Op.like]: `%${query}%` } }
+          ]
+        }
+    })
+    if (foundPosts) {
+        res.status(200).json(foundPosts);
+    } else {
+        res.status(404).json();
     }
 }
 
