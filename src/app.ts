@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import { db } from './models';
 import postRoutes from './routes/postRoutes';
 import userRoutes from './routes/userRoutes';
+import searchRoute from './routes/searchRoute'
 
 const app = express();
 
@@ -18,6 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // routes
+app.use('/api/posts/search', searchRoute)
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
 
